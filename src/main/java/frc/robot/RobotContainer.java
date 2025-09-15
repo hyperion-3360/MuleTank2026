@@ -30,7 +30,7 @@ import frc.robot.subsystems.drive.GyroIONavX;
 import frc.robot.subsystems.roller.Roller;
 import frc.robot.subsystems.roller.RollerIO;
 import frc.robot.subsystems.roller.RollerIOSim;
-import frc.robot.subsystems.roller.RollerIOTalonSRX;
+import frc.robot.subsystems.roller.RollerIOTalonFX;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -57,7 +57,7 @@ public class RobotContainer {
         // Real robot, instantiate hardware IO implementations
         //        drive = new Drive(new DriveIOTalonSRX(), new GyroIOPigeon2());
         drive = new Drive(new DriveIOTalonSRX(), new GyroIONavX());
-        roller = new Roller(new RollerIOTalonSRX());
+        roller = new Roller(new RollerIOTalonFX());
         break;
 
       case SIM:
