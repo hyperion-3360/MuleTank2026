@@ -41,6 +41,15 @@ public class RollerIOSim implements RollerIO {
 
   @Override
   public void setVoltage(double volts) {
+    // TODO please show me a cleaner way to do that Igor 8h 03 PM 2025/09/15
+    // adds safety to motor position and stops motor if it encounters resistance
+    if (sim.getCurrentDrawAmps() > RollerConstants.currentTreshold
+        || sim.getAngularPositionRad() < RollerConstants.maxPos
+            && volts > 0
+            && sim.getAngularPositionRad() > RollerConstants.minPos
+            && volts < 0) {
+    } else volts = 0.0;
+
     appliedVolts = MathUtil.clamp(volts, -12.0, 12.0);
   }
 }

@@ -13,6 +13,7 @@
 
 package frc.robot.subsystems.roller;
 
+import static edu.wpi.first.units.Units.Amp;
 import static frc.robot.subsystems.roller.RollerConstants.*;
 import static frc.robot.util.PhoenixUtil.*;
 
@@ -65,6 +66,14 @@ public class RollerIOTalonFX implements RollerIO {
 
   @Override
   public void setVoltage(double volts) {
+    // TODO please show me a cleaner way to do that Igor 8h 03 PM 2025/09/15
+    // adds safety to motor position and stops motor if it encounters resistance
+    if (currentAmps.asSupplier().get().in(Amp) > RollerConstants.currentTreshold
+        || positionRot.getValueAsDouble() < RollerConstants.maxPos
+            && volts > 0
+            && positionRot.getValueAsDouble() > RollerConstants.minPos
+            && volts < 0) {
+    } else volts = 0.0;
     roller.setControl(voltageRequest.withOutput(volts));
   }
 }

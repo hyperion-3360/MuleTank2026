@@ -38,7 +38,9 @@ public class Roller extends SubsystemBase {
 
   public Command runTeleop(DoubleSupplier forward, DoubleSupplier reverse) {
     return runEnd(
-        () -> io.setVoltage((forward.getAsDouble() - reverse.getAsDouble()) * 12.0),
+        () -> {
+          io.setVoltage((forward.getAsDouble() - reverse.getAsDouble()) * 12.0);
+        },
         () -> io.setVoltage(0.0));
   }
 }
